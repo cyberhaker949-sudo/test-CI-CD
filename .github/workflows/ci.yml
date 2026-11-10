@@ -4,7 +4,6 @@ name: My First CI
 on:
   push:
 
-
 jobs:
   connect:
     runs-on: ubuntu-latest
@@ -18,8 +17,7 @@ jobs:
       - name: Connect to VPS
         env:
           SSHPASS: ${{ secrets.gizlin }}
-        run:
-
+        run: |
           sshpass -e ssh \
             -o StrictHostKeyChecking=accept-new \
             -p 22 \
