@@ -20,5 +20,5 @@ jobs:
         run: |
           sshpass -e ssh \
             -o StrictHostKeyChecking=accept-new \
-            root@sapak.tejribe.online \
+            root@45.61.176.113 \
             "git clone https://github.com/USERNAME/REPOSITORY.git /var/www/myproject"
