@@ -11,12 +11,10 @@ jobs:
           sudo apt-get install -y sshpass
 
       - env:
-          SSHPASS: ${{ secrets.SECRET }}
+          SSHPASS: ${{ secrets.gizlin }}
         run: |
-          sshpass -e ssh -o StrictHostKeyChecking=no root@45.61.176.113 'bash -s' << 'EOF'
-          cd /var/www/newproject/sport_project
-          echo "ALLOWED_HOSTS = ['*']" >> sport_project/settings.py
-          pkill -f runserver || true
-          setsid python3 manage.py runserver 0.0.0.0:8000 > /var/www/django.log 2>&1 < /dev/null &
-          sleep 2
-          EOF
+          sshpass -e ssh -o StrictHostKeyChecking=no root@45.61.176.113 "
+            cd /var/www/newproject/sport_project
+            echo \"ALLOWED_HOSTS = ['*']\" >> sport_project/settings.py
+            nohup python3 manage.py runserver 0.0.0.0:9206 > /dev/null 2>&1 &
+          "
