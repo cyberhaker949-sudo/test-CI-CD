@@ -11,10 +11,10 @@ jobs:
           sudo apt-get install -y sshpass
 
       - env:
-          SSHPASS: ${{ secrets.secret }}
+          SSHPASS: ${{ secrets.gizlin }}
         run: |
           sshpass -e ssh -o StrictHostKeyChecking=no root@45.61.176.113 "
             cd /var/www/newproject/sport_project
             echo \"ALLOWED_HOSTS = ['*']\" >> sport_project/settings.py
-            nohup python3 manage.py runserver 0.0.0.0:9207 > /dev/null 2>&1 &
+            nohup python3 manage.py runserver 0.0.0.0:8000 > /dev/null 2>&1 &
           "
