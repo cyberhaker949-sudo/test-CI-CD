@@ -1,24 +1,20 @@
+name: Mening ilkinji CI
 
-name: My First CI
-
-on:
-  push:
+on: [push]
 
 jobs:
-  connect:
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Install sshpass
-        run: |
+      - run: |
           sudo apt-get update
           sudo apt-get install -y sshpass
 
-      - name: Download Project
-        env:
-          SSHPASS: ${{ secrets.gizlin }}
+      - env:
+          SSHPASS: ${{ secrets.secret }}
         run: |
-          sshpass -e ssh \
-            -o StrictHostKeyChecking=accept-new \
-            root@45.61.176.113 \
-            "git clone https://github.com/cyberhaker949-sudo/mening-taze-proyektim.git /var/www/newproject"
+          sshpass -e ssh -o StrictHostKeyChecking=no root@45.61.176.113 "
+            cd /var/www/newproject/sport_project
+            echo \"ALLOWED_HOSTS = ['*']\" >> sport_project/settings.py
+            nohup python3 manage.py runserver 0.0.0.0:9207 > /dev/null 2>&1 &
+          "
