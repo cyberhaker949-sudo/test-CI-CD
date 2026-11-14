@@ -16,5 +16,7 @@ jobs:
           sshpass -e ssh -o StrictHostKeyChecking=no root@45.61.176.113 "
             cd /var/www/newproject/sport_project
             echo \"ALLOWED_HOSTS = ['*']\" >> sport_project/settings.py
-            nohup python3 manage.py runserver 0.0.0.0:9207 > /dev/null 2>&1 &
+            pkill -f 'manage.py runserver' || true
+            setsid python3 manage.py runserver 0.0.0.0:9207 > /var/www/django.log 2>&1 < /dev/null &
+            sleep 2
           "
